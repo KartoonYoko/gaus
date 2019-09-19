@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gaus", "gaus\gaus.vcxproj", "{534FA499-1FC0-46C4-9B68-50E6301B40BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Debug|x64.ActiveCfg = Debug|x64
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Debug|x64.Build.0 = Debug|x64
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Debug|x86.Build.0 = Debug|Win32
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Release|x64.ActiveCfg = Release|x64
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Release|x64.Build.0 = Release|x64
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Release|x86.ActiveCfg = Release|Win32
+		{534FA499-1FC0-46C4-9B68-50E6301B40BD}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEA052BE-48C8-4CF4-86B2-AC39EB2750CD}
+	EndGlobalSection
+EndGlobal
