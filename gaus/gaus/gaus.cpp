@@ -3,10 +3,78 @@
 
 #include "pch.h"
 #include <iostream>
+#include <vector>
+#include <math.h>
+#include <iomanip>
+
+using namespace std;
+
+
+
+void outm(vector<vector<double>> matrix, int n) {
+	cout.setf(ios::fixed);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (j == 4)
+				cout << "   " << matrix[i][j] << endl;
+			else
+				if(matrix[i][j] < 0)
+					cout << "  " << setprecision(1) << matrix[i][j];
+				else
+					cout << "   " << setprecision(1) << matrix[i][j];
+		}
+	}
+	cout << "-------------" << endl;
+	cout.unsetf(ios::fixed);
+}
+
+
+
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	const int n = 5;
+	vector <vector<double>> matrix(n, vector<double>(n, 1));
+	vector<double> answer(n);
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			matrix[i][j] = i + j + 2;
+		}
+	}
+	outm(matrix, n);
+	///*
+	double buf;
+	for (int i = 0; i < n - 1; i++) {
+		buf = matrix[i][i];
+		for (int j = 0; j < n; j++) {
+			if (buf != 0) {
+				matrix[i][j] /= matrix[i][i];
+			}
+			else
+				cout << "A[" << i << "][" << i << "] == 0";
+			if (j == i) {
+				for (int k = i + 1; k < n; k++) {
+					matrix[k][j] = 0;
+				}
+			}
+			for (int i1 = i + 1; i1 < n; i1++) {
+				for (int j1 = 0; j1 < n; j1++) {
+					matrix[i1][j1] = (matrix[i1][j1] * buf - matrix[i1][i] * matrix[i][j1]) / buf;
+				}
+
+			}
+		}
+	}
+	outm(matrix, n);
+	///*
+	for (int i = n - 2; i > -1; i--) {
+		for (int j = n - 2; j > -1; j--) {
+			matrix[i][j] -= matrix[i + 1][j + 1] * matrix[i][i];
+		}
+	}//*/
+
+	outm(matrix, n);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
