@@ -39,7 +39,7 @@ int main()
 	vector <vector<double>> nevyaz(n, vector<double>(n + 1, 1));
 	vector<double> answer(n);
 	double buf,  buf2;
-	double eps = 0.01;
+	double eps = 1 * pow(10,-2);
 
 	matrix[0][1] = -0.66;
 	matrix[1][1] = -0.59;
@@ -76,7 +76,72 @@ int main()
 	nevyaz = matrix;
 
 	outm(matrix, n);
+	
 	///*
+
+	vector <vector<double>> b(n, vector<double>(n + 1, 0));
+	vector <vector<double>> t(n, vector<double>(n + 1, 0));
+
+	for (int i = 0; i < n; i++) {
+		b[i][0] = matrix[i][0];
+	}
+	for (int j = 1; j < n; j++) {
+		t[0][j] = matrix[0][j] / b[0][0];
+	}
+	for (int i = 0; i < n; i++) {
+		t[i][i] = 1;
+	} 
+	
+
+
+	for (int k = 1; k < n; k++) {
+		for (int i = k; i < n; i++) {
+			double sum = 0;
+			for (int m = 0; m <= k - 1; m++) {
+				sum += b[i][m] * t[m][k];
+			}
+			b[i][k] = matrix[i][k] - sum;
+		}
+		for (int j = k + 1; j < n; j++) {
+			double sum = 0;
+			for (int m = 0; m <= k - 1; m++) {
+				sum += b[k][m] * t[m][j];
+			}
+			t[k][j] = 1 / b[k][k] * (matrix[k][j] - sum);
+		}
+	}
+
+	outm(t, n);
+	outm(b, n);
+
+
+	vector<double> y(n, 0);
+	y[0] = matrix[0][n] / b[0][0];
+
+	for (int i = 1; i < n; i++) {
+		double sum = 0;
+		for (int m = 0; m <= i - 1; m++) {
+			sum += b[i][m] * y[m];
+		}
+		y[i] = (1 / b[i][i]) * (matrix[i][n] - sum);
+	}
+
+	cout << y[0] << " " << y[1] << " " << y[2] << " " << y[3] << " " << y[4] << endl;
+
+	answer[n - 1] = y[n - 1];
+
+	for (int i = n - 2; i > -1; i--) {
+		double sum = 0;
+		for (int m = i + 1; m < n; m++) {
+			sum += t[i][m] * answer[m];
+		}
+		answer[i] = y[i] - sum;
+	}
+
+	cout << answer[0] << " " << answer[1] << " " << answer[2] << " " << answer[3] << " " << answer[4] << endl;
+
+	//*/
+	/*
 	for (int i = 0; i < n; i++) {
 		buf = matrix[i][i];
 		for (int j = i; j < n + 1; j++)
@@ -104,7 +169,7 @@ int main()
 	for (int i = 0; i < n; i++) {
 		answer[i] = matrix[i][n];
 	}
-	///*
+	//*/
 
 	
 	for (int i = 0; i < n; i++) {

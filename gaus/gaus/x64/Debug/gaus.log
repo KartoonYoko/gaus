@@ -1,2 +1,3 @@
 ﻿  gaus.cpp
+C:\Users\crash\Desktop\labsMath\gaus\gaus\gaus\gaus.cpp(41,15): warning C4101:  buf2: неиспользованная локальная переменная
   gaus.vcxproj -> C:\Users\crash\Desktop\labsMath\gaus\gaus\x64\Debug\gaus.exe
