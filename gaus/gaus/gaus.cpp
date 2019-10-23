@@ -29,7 +29,39 @@ void outm(vector<vector<double>> matrix, int n) {
 	cout.unsetf(ios::fixed);
 }
 
+bool CompareTwoVectors(const vector<double> &vec1, const vector<double>& vec2, const int &size, const double &accuracy) {
+	bool answer = false;
+	for (int i = 0; i < size; i++) {
+		if (abs(vec1[i] - vec2[i]) < accuracy) {
+			answer = true;
+		}
+		else
+		{
+			answer = false;
+			break;
+		}
+	}
+	return answer;
+}
 
+vector<double> MethodOfIteration(const vector<vector<double>>& matrix,const int& n) {
+	vector<double> recAns(n);
+	vector<double> prevAns(n);
+	vector <vector<double>> bufMat(n, vector<double>(n));
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (i != j)
+				bufMat[i][j] = -matrix[i][j] / matrix[i][i];
+			else
+				bufMat[i][j] = matrix[i][n] / matrix[i][i];
+		}
+	}
+	do {
+
+	}
+	while (CompareTwoVectors(recAns, prevAns, n, 0.001));
+	return recAns;
+}
 
 
 int main()
