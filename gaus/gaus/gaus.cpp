@@ -29,40 +29,6 @@ void outm(vector<vector<double>> matrix, int n) {
 	cout.unsetf(ios::fixed);
 }
 
-bool CompareTwoVectors(const vector<double> &vec1, const vector<double>& vec2, const int &size, const double &accuracy) {
-	bool answer = false;
-	for (int i = 0; i < size; i++) {
-		if (abs(vec1[i] - vec2[i]) < accuracy) {
-			answer = true;
-		}
-		else
-		{
-			answer = false;
-			break;
-		}
-	}
-	return answer;
-}
-
-vector<double> MethodOfIteration(const vector<vector<double>>& matrix,const int& n) {
-	vector<double> recAns(n);
-	vector<double> prevAns(n);
-	vector <vector<double>> bufMat(n, vector<double>(n));
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if (i != j)
-				bufMat[i][j] = -matrix[i][j] / matrix[i][i];
-			else
-				bufMat[i][j] = matrix[i][n] / matrix[i][i];
-		}
-	}
-	do {
-
-	}
-	while (CompareTwoVectors(recAns, prevAns, n, 0.001));
-	return recAns;
-}
-
 
 int main()
 {
@@ -70,8 +36,8 @@ int main()
 	vector <vector<double>> matrix(n, vector<double>(n + 1, 1));
 	vector <vector<double>> nevyaz(n, vector<double>(n + 1, 1));
 	vector<double> answer(n);
-	double buf,  buf2;
-	double eps = 1 * pow(10,-2);
+	double buf, buf2;
+	double eps = 1 * pow(10, -2);
 
 	matrix[0][1] = -0.66;
 	matrix[1][1] = -0.59;
@@ -108,8 +74,10 @@ int main()
 	nevyaz = matrix;
 
 	outm(matrix, n);
-	
-	///*
+
+	//метод халецкого
+	{
+	/*
 
 	vector <vector<double>> b(n, vector<double>(n + 1, 0));
 	vector <vector<double>> t(n, vector<double>(n + 1, 0));
@@ -122,8 +90,8 @@ int main()
 	}
 	for (int i = 0; i < n; i++) {
 		t[i][i] = 1;
-	} 
-	
+	}
+
 
 
 	for (int k = 1; k < n; k++) {
@@ -172,38 +140,46 @@ int main()
 
 	cout << answer[0] << " " << answer[1] << " " << answer[2] << " " << answer[3] << " " << answer[4] << endl;
 
-	//*/
-	/*
-	for (int i = 0; i < n; i++) {
-		buf = matrix[i][i];
-		for (int j = i; j < n + 1; j++)
-		{
-			matrix[i][j] /= buf;
-		}
-		for (int k = i + 1; k < n; k++) {
-			buf2 = matrix[k][i];
+	*/
+	///*
+
+}
+
+
+	// метод жордана-гаусса
+	{
+		for (int i = 0; i < n; i++) {
+			buf = matrix[i][i];
 			for (int j = i; j < n + 1; j++)
 			{
+				matrix[i][j] /= buf;
+			}
+			for (int k = i + 1; k < n; k++) {
+				buf2 = matrix[k][i];
+				for (int j = i; j < n + 1; j++)
+				{
 					matrix[k][j] -= buf2 * matrix[i][j];
+				}
 			}
 		}
-	}
-	for (int i = n - 1; i > -1; i--) {
-		for (int k = i - 1; k > -1; k--) {
-			buf = matrix[k][i];
-			for (int j = n; j > -1; j--)
-			{
-				matrix[k][j] -= buf * matrix[i][j];
+		for (int i = n - 1; i > -1; i--) {
+			for (int k = i - 1; k > -1; k--) {
+				buf = matrix[k][i];
+				for (int j = n; j > -1; j--)
+				{
+					matrix[k][j] -= buf * matrix[i][j];
+				}
 			}
 		}
-	}
-	outm(matrix, n);
-	for (int i = 0; i < n; i++) {
-		answer[i] = matrix[i][n];
-	}
-	//*/
+		outm(matrix, n);
+		for (int i = 0; i < n; i++) {
+			answer[i] = matrix[i][n];
+		}
+		//*/
 
-	
+	}
+
+
 	for (int i = 0; i < n; i++) {
 		buf = 0;
 		for (int j = 0; j < n; j++) {
