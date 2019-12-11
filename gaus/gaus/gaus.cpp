@@ -10,7 +10,7 @@
 using namespace std;
 
 
-
+// выводит массив размером N x N+1 в консоль
 void outm(vector<vector<double>> matrix, int n) {
 	cout.setf(ios::fixed);
 	const unsigned accuracy = 2;
